@@ -75,7 +75,7 @@ function winner(totalScore) {
 
 function game() {
     for (let i = 0; i < 5; i++) {
-        console.log(`~~ Round ${i} ~~`);
+        console.log(`~~ Round ${i+1} ~~`);
         let playerChoice = prompt("Rock, Paper, or Scissors?: ");
         console.log(playRound(playerChoice, getComputerChoice()));
     }
