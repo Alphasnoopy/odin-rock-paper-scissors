@@ -68,11 +68,14 @@ function game() {
         console.log(playRound(playerChoice, getComputerChoice()));
     }
     
-    if (score > 0){
+    if (score > 0) {
         console.log("Congratulations! You are the winner.");
     }
-    else {
+    else if (score < 0) {
         console.log("Oof! Better luck next time.");
+    }
+    else {
+        console.log("A tie! Great minds think alike.")
     }
 }
 
