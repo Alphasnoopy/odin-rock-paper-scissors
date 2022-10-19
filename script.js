@@ -61,13 +61,7 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function game() {
-    for (let i = 0; i < 5; i++) {
-        console.log(`~~ Round ${i} ~~`);
-        let playerChoice = prompt("Rock, Paper, or Scissors?: ");
-        console.log(playRound(playerChoice, getComputerChoice()));
-    }
-    
+function winner(totalScore) {
     if (score > 0) {
         console.log("Congratulations! You are the winner.");
     }
@@ -75,8 +69,18 @@ function game() {
         console.log("Oof! Better luck next time.");
     }
     else {
-        console.log("A tie! Great minds think alike.")
+        console.log("A tie! Great minds think alike.");
     }
+}
+
+function game() {
+    for (let i = 0; i < 5; i++) {
+        console.log(`~~ Round ${i} ~~`);
+        let playerChoice = prompt("Rock, Paper, or Scissors?: ");
+        console.log(playRound(playerChoice, getComputerChoice()));
+    }
+
+    winner();
 }
 
 game();
