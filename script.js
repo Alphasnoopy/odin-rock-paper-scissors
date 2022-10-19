@@ -61,7 +61,7 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function winner(totalScore) {
+function winner() {
     if (score > 0) {
         console.log("Congratulations! You are the winner.");
     }
