@@ -68,10 +68,12 @@ function game() {
         console.log(playRound(playerChoice, getComputerChoice()));
     }
     
-    if (winner > 0){
+    if (score > 0){
         console.log("Congratulations! You are the winner.");
     }
     else {
         console.log("Oof! Better luck next time.");
     }
 }
+
+game();
