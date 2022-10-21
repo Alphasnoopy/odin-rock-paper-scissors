@@ -83,5 +83,3 @@ function game() {
 
     winner();
 }
-
-game();
