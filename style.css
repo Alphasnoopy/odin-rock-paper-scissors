@@ -57,9 +57,20 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: all .07s ease;
 }
 
 .cardName {
     font-size: 25px;
     margin: 0;
+}
+
+.card:hover {
+    transform: scale(1.1);
+    color: rgb(53, 128, 189);
+}
+
+.playCard {
+    transform: scale(1.1);
+    color: rgb(53, 128, 189);
 }
