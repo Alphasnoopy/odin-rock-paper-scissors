@@ -1,24 +1,27 @@
 // Global
-let score = 0;
-const rps = ["rock","paper","scissors"];
+let playerScore = 0;
+let computerScore = 0;
+const cardChoices = ["rock","paper","scissors","lizard","spock"];
+const cardRules = {'rock':['scissors', 'lizard'],
+                    'paper':['rock', 'spock'],
+                    'scissors':['paper', 'lizard'],
+                    'lizard':['spock', 'paper'],
+                    'spock':['scissors', 'rock']};
+const cardFight = new Map(Object.entries(cardRules));
 
 function getComputerChoice() {
-    return rps[Math.floor(Math.random() * rps.length)];
+    return cardChoices[Math.floor(Math.random() * cardChoices.length)];
 }
 
 function playRound(playerSelection, computerSelection) {
-    playerSelection = playerSelection.toLowerCase();
-    computerSelection = computerSelection.toLowerCase();
     if (playerSelection === computerSelection) {
-        
+
     }
-    else if ((playerSelection === "rock" && computerSelection === "scissors") 
-            || (playerSelection === "paper" && computerSelection === "rock")
-            || (playerSelection === "scissors" && computerSelection === "paper")) {
-        score += 1;
+    else if (cardFight.get(playerSelection).includes(computerSelection)) {
+        playerScore += 1;
     }
     else {
-        score -= 1;
+        computerScore += 1;
     }
 }
 
@@ -36,11 +39,15 @@ function winner() {
 }
 
 function game() {
-    for (let i = 0; i < 5; i++) {
-        console.log(`~~ Round ${i+1} ~~`);
-        let playerChoice = prompt("Rock, Paper, or Scissors?: ");
-        console.log(playRound(playerChoice, getComputerChoice()));
-    }
-
-    winner();
+    const cardHand = document.querySelectorAll('.card');
+    cardHand.forEach((card) => {
+        card.addEventListener('click', () => {
+            card.classList.add('playCard');
+            let playerSelection = card.querySelector('.cardName').innerHTML;
+            playRound(playerSelection,getComputerChoice());
+            card.classList.remove('playCard');
+        })
+    })
 }
+
+game()
