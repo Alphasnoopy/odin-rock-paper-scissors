@@ -1,7 +1,7 @@
 // Global
 let playerScore = 0;
 let computerScore = 0;
-let roundNum = 0;
+let roundNum = 1;
 const cardChoices = ["rock","paper","scissors","lizard","spock"];
 const cardRules = {'rock':['scissors', 'lizard'],
                     'paper':['rock', 'spock'],
@@ -27,8 +27,10 @@ function playRound(playerSelection, computerSelection) {
     else {
         computerScore += 1;
     }
-    playerScale.innerHTML = playerScore;
-    computerScale.innerHTML = computerScore;
+    let playerScorePad = (playerScore < 10) ? String(playerScore).padStart(2,'0') : playerScore;
+    let computerScorePad = (computerScore < 10) ? String(computerScore).padStart(2,'0') : computerScore;
+    playerScale.innerHTML = playerScorePad;
+    computerScale.innerHTML = computerScorePad;
     scale();
 }
 
@@ -60,7 +62,8 @@ function game() {
     cardHand.forEach((card) => {
         card.addEventListener('click', () => {
             card.classList.add('playCard');
-            round.innerHTML = `~ Round ${roundNum} ~`;
+            let roundNumPad = (roundNum < 10) ? String(roundNum).padStart(2,'0') : roundNum;
+            round.textContent = `~ Round ${roundNumPad} ~`;
             let playerSelection = card.querySelector('.cardName').innerHTML;
             playRound(playerSelection,getComputerChoice());
             card.classList.remove('playCard');
