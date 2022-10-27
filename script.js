@@ -1,6 +1,7 @@
 // Global
 let playerScore = 0;
 let computerScore = 0;
+let roundNum = 0;
 const cardChoices = ["rock","paper","scissors","lizard","spock"];
 const cardRules = {'rock':['scissors', 'lizard'],
                     'paper':['rock', 'spock'],
@@ -55,12 +56,15 @@ function winner() {
 
 function game() {
     const cardHand = document.querySelectorAll('.card');
+    const round = document.querySelector('.round');
     cardHand.forEach((card) => {
         card.addEventListener('click', () => {
             card.classList.add('playCard');
+            round.innerHTML = `~ Round ${roundNum} ~`;
             let playerSelection = card.querySelector('.cardName').innerHTML;
             playRound(playerSelection,getComputerChoice());
             card.classList.remove('playCard');
+            roundNum += 1;
         })
     })
 }
