@@ -8,6 +8,9 @@ const cardRules = {'rock':['scissors', 'lizard'],
                     'lizard':['spock', 'paper'],
                     'spock':['scissors', 'rock']};
 const cardFight = new Map(Object.entries(cardRules));
+const playerScale = document.getElementById('playerScale');
+const computerScale = document.getElementById('computerScale');
+const balanceScale = document.getElementById('balance');
 
 function getComputerChoice() {
     return cardChoices[Math.floor(Math.random() * cardChoices.length)];
@@ -22,6 +25,18 @@ function playRound(playerSelection, computerSelection) {
     }
     else {
         computerScore += 1;
+    }
+    playerScale.innerHTML = playerScore;
+    computerScale.innerHTML = computerScore;
+    scale();
+}
+
+function scale() {
+    balanceScale.removeAttribute('class');
+    switch(true) {
+        case (playerScore === computerScore): balanceScale.classList.add('las', 'la-balance-scale'); break;
+        case (playerScore > computerScore): balanceScale.classList.add('las', 'la-balance-scale-left'); break;
+        case (playerScore < computerScore): balanceScale.classList.add('las', 'la-balance-scale-right'); break;
     }
 }
 
