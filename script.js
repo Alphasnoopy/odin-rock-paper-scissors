@@ -17,6 +17,16 @@ function getComputerChoice() {
     return cardChoices[Math.floor(Math.random() * cardChoices.length)];
 }
 
+function battleCards(listClass) {
+    const battleChoice = document.querySelectorAll('.choice');
+    let newChoice = document.getElementById(listClass[1]);
+    listClass[1] = newChoice.classList;
+    battleChoice.forEach((choice) => { 
+        choice.removeAttribute('class');
+        choice.classList.add(...listClass.shift(), 'choice');
+    });
+}
+
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
 
@@ -64,8 +74,10 @@ function game() {
             card.classList.add('playCard');
             let roundNumPad = (roundNum < 10) ? String(roundNum).padStart(2,'0') : roundNum;
             round.textContent = `~ Round ${roundNumPad} ~`;
-            let playerSelection = card.querySelector('.cardName').innerHTML;
-            playRound(playerSelection,getComputerChoice());
+            let playerSelection = card.firstElementChild;
+            let computerSelection = getComputerChoice();
+            battleCards([playerSelection.classList,computerSelection]);
+            playRound(playerSelection.id, computerSelection);
             card.classList.remove('playCard');
             roundNum += 1;
         })
