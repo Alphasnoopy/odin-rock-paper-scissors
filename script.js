@@ -2,23 +2,31 @@
 let playerScore = 0;
 let computerScore = 0;
 let roundNum = 1;
+let checkScore = 0;
+const cardHand = document.querySelectorAll('.card');
+const round = document.querySelector('.round');
+const overlay = document.querySelector('.overlay');
 const cardChoices = ["rock","paper","scissors","lizard","spock"];
 const cardRules = {'rock':['scissors', 'lizard'],
                     'paper':['rock', 'spock'],
                     'scissors':['paper', 'lizard'],
                     'lizard':['spock', 'paper'],
                     'spock':['scissors', 'rock']};
+const orignCards = document.querySelector('.battleArea').children;
 const cardFight = new Map(Object.entries(cardRules));
+const scores = document.querySelectorAll('.score');
 const playerScale = document.getElementById('playerScale');
 const computerScale = document.getElementById('computerScale');
 const balanceScale = document.getElementById('balance');
+const battleChoice = document.querySelectorAll('.choice');
+const restartBtn = document.createElement('button');
+const gameBody = document.querySelector('.gameBody');
 
 function getComputerChoice() {
     return cardChoices[Math.floor(Math.random() * cardChoices.length)];
 }
 
 function battleCards(listClass) {
-    const battleChoice = document.querySelectorAll('.choice');
     let newChoice = document.getElementById(listClass[1]);
     listClass[1] = newChoice.classList;
     battleChoice.forEach((choice) => { 
@@ -33,14 +41,16 @@ function playRound(playerSelection, computerSelection) {
     }
     else if (cardFight.get(playerSelection).includes(computerSelection)) {
         playerScore += 1;
+        checkScore += 1;
     }
     else {
         computerScore += 1;
+        checkScore += 1;
     }
     let playerScorePad = (playerScore < 10) ? String(playerScore).padStart(2,'0') : playerScore;
     let computerScorePad = (computerScore < 10) ? String(computerScore).padStart(2,'0') : computerScore;
-    playerScale.innerHTML = playerScorePad;
-    computerScale.innerHTML = computerScorePad;
+    playerScale.textContent = playerScorePad;
+    computerScale.textContent = computerScorePad;
     scale();
 }
 
@@ -53,22 +63,25 @@ function scale() {
     }
 }
 
-function winner() {
-    console.log("~~ Verdict ~~")
-    if (score > 0) {
-        console.log("Congratulations! You are the winner.");
-    }
-    else if (score < 0) {
-        console.log("Oof! Better luck next time.");
-    }
-    else {
-        console.log("A tie! Great minds think alike.");
-    }
+function restart() {
+    gameBody.removeChild(restartBtn);
+    playerScore = 0;
+    computerScore = 0;
+    roundNum = 1;
+    round.textContent = `~ Round ?? ~`;
+    scores.forEach((side) => side.textContent = '??');
+    balanceScale.removeAttribute('class');
+    balanceScale.classList.add('las', 'la-balance-scale');
+}
+
+function gameEnd() {
+    restartBtn.classList.add('restartBtn');
+    restartBtn.textContent = 'Play Again';
+    gameBody.appendChild(restartBtn);
+    restartBtn.addEventListener('click', () => window.location.reload());
 }
 
 function game() {
-    const cardHand = document.querySelectorAll('.card');
-    const round = document.querySelector('.round');
     cardHand.forEach((card) => {
         card.addEventListener('click', () => {
             card.classList.add('playCard');
@@ -80,6 +93,9 @@ function game() {
             playRound(playerSelection.id, computerSelection);
             card.classList.remove('playCard');
             roundNum += 1;
+            if (checkScore === 5) {
+                gameEnd();
+            }
         })
     })
 }

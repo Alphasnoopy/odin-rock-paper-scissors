@@ -59,6 +59,9 @@ h1 {
     align-items: center;
     transition: all .07s ease;
     cursor: pointer;
+    font-size: 80px;
+    background-color: transparent;
+    border-style: none;
 }
 
 .cardName {
