@@ -1,7 +1,7 @@
 // Global
 let playerScore = 0;
 let computerScore = 0;
-let roundNum = 1;
+let roundNum = 0;
 let checkScore = 0;
 const cardHand = document.querySelectorAll('.card');
 const round = document.querySelector('.round');
@@ -21,6 +21,12 @@ const balanceScale = document.getElementById('balance');
 const battleChoice = document.querySelectorAll('.choice');
 const restartBtn = document.createElement('button');
 const gameBody = document.querySelector('.gameBody');
+
+function roundScore() {
+    roundNum += 1;
+    let roundNumPad = (roundNum < 10) ? String(roundNum).padStart(2,'0') : roundNum;
+    round.textContent = `~ Round ${roundNumPad} ~`;
+}
 
 function getComputerChoice() {
     return cardChoices[Math.floor(Math.random() * cardChoices.length)];
@@ -73,15 +79,14 @@ function gameEnd() {
 function game() {
     cardHand.forEach((card) => {
         card.addEventListener('click', () => {
-            card.classList.add('playCard');
-            let roundNumPad = (roundNum < 10) ? String(roundNum).padStart(2,'0') : roundNum;
-            round.textContent = `~ Round ${roundNumPad} ~`;
             let playerSelection = card.firstElementChild;
             let computerSelection = getComputerChoice();
+            
+            card.classList.add('playCard');
+            roundScore();
             battleCards([playerSelection.classList,computerSelection]);
             playRound(playerSelection.id, computerSelection);
             card.classList.remove('playCard');
-            roundNum += 1;
             if (checkScore === 5) {
                 gameEnd();
             }
