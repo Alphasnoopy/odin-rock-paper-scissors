@@ -63,17 +63,6 @@ function scale() {
     }
 }
 
-function restart() {
-    gameBody.removeChild(restartBtn);
-    playerScore = 0;
-    computerScore = 0;
-    roundNum = 1;
-    round.textContent = `~ Round ?? ~`;
-    scores.forEach((side) => side.textContent = '??');
-    balanceScale.removeAttribute('class');
-    balanceScale.classList.add('las', 'la-balance-scale');
-}
-
 function gameEnd() {
     restartBtn.classList.add('restartBtn');
     restartBtn.textContent = 'Play Again';
