@@ -22,7 +22,7 @@ const battleChoice = document.querySelectorAll('.choice');
 const restartBtn = document.createElement('button');
 const gameBody = document.querySelector('.gameBody');
 
-function roundScore() {
+function roundNumChange() {
     roundNum += 1;
     let roundNumPad = (roundNum < 10) ? String(roundNum).padStart(2,'0') : roundNum;
     round.textContent = `~ Round ${roundNumPad} ~`;
@@ -70,6 +70,10 @@ function scale() {
 }
 
 function gameEnd() {
+    cardHand.forEach((card) => {
+        card.disabled = true;
+        card.style = 'border-style: none';
+    });
     restartBtn.classList.add('restartBtn');
     restartBtn.textContent = 'Play Again';
     gameBody.appendChild(restartBtn);
@@ -78,12 +82,30 @@ function gameEnd() {
 
 function game() {
     cardHand.forEach((card) => {
+        card.addEventListener('mouseover', () => {
+            let playerSelection = card.firstElementChild;
+            let strengthCardDeck = cardFight.get(playerSelection.id);
+            strengthCardDeck.forEach((strength) => {
+                let cardStrength = document.getElementById(strength).parentNode;
+                cardStrength.classList.add('strength');
+            });
+            let weakCardDeck = cardChoices.filter(weakCard => !strengthCardDeck.concat(playerSelection.id).includes(weakCard));
+            weakCardDeck.forEach((weakness) => {
+                let cardWeakness = document.getElementById(weakness).parentNode;
+                cardWeakness.classList.add('weakness');
+            });   
+        });
+        card.addEventListener('mouseout', () => {
+            cardChoices.forEach((card) => {
+                let currCard = document.getElementById(card).parentNode;
+                currCard.classList.remove('strength', 'weakness');
+            })
+        })
         card.addEventListener('click', () => {
             let playerSelection = card.firstElementChild;
             let computerSelection = getComputerChoice();
-            
             card.classList.add('playCard');
-            roundScore();
+            roundNumChange();
             battleCards([playerSelection.classList,computerSelection]);
             playRound(playerSelection.id, computerSelection);
             card.classList.remove('playCard');
