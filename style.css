@@ -1,3 +1,6 @@
+body {
+    background-color: #71bfd6;
+}
 /* Header Section */
 .gameHead {
     display: flex;
@@ -6,6 +9,8 @@
 }
 
 h1 {
+    color: #2e4744;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 60px;
 }
 
@@ -38,9 +43,10 @@ h1 {
 }
 
 .choice {
-    border: 5px solid black;
+    border: 5px solid rgb(219, 214, 214);
     border-radius: 25px;
     padding: 30px 10px;
+    color: black;
 }
 
 .message {
@@ -51,40 +57,49 @@ h1 {
     display: flex;
     gap: 100px;
     font-size: 100px;
+    border: 5px solid black;
+    border-radius: 5px;
 }
 
 .card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    position: relative;
     transition: all .07s ease;
     cursor: pointer;
-    font-size: 80px;
-    background-color: transparent;
-    border-style: none;
+}
+
+img {
+    height: 100px;
+    width: auto;
 }
 
 .cardName {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
     font-size: 25px;
     margin: 0;
+    padding: 0;
 }
 
-.card:hover {
+.cardhover {
     transform: scale(1.1);
-    color: rgb(53, 128, 189);
+    color: #5e5091;
 }
 
 .playCard {
     transform: scale(1.1);
-    color: rgb(53, 128, 189);
+    color: #8771d6;
 }
 
 /* Hover Card Rules */
 .strength {
-    border-bottom: 5px solid rgb(42, 180, 42);
+    border-bottom: 5px solid #2bb932;
 }
 
 .weakness {
-    border-bottom: 5px solid rgb(221, 60, 60);
+    border-bottom: 5px solid #a06468;
 }
-

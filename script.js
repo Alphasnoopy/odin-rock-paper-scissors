@@ -70,10 +70,6 @@ function scale() {
 }
 
 function gameEnd() {
-    cardHand.forEach((card) => {
-        card.disabled = true;
-        card.style = 'border-style: none';
-    });
     restartBtn.classList.add('restartBtn');
     restartBtn.textContent = 'Play Again';
     gameBody.appendChild(restartBtn);
@@ -84,7 +80,12 @@ function game() {
     cardHand.forEach((card) => {
         card.addEventListener('mouseover', () => {
             let playerSelection = card.firstElementChild;
+            let selectionName = card.querySelector('.cardName');
             let strengthCardDeck = cardFight.get(playerSelection.id);
+
+            card.classList.add('cardhover');
+            playerSelection.style = 'opacity: 0.3';
+            selectionName.style = 'opacity: 1';
             strengthCardDeck.forEach((strength) => {
                 let cardStrength = document.getElementById(strength).parentNode;
                 cardStrength.classList.add('strength');
@@ -96,9 +97,13 @@ function game() {
             });   
         });
         card.addEventListener('mouseout', () => {
+            let playerSelection = card.firstElementChild;
+            let selectionName = card.querySelector('.cardName');
+            playerSelection.style = 'opacity: 1';
+            selectionName.style = 'opacity: 0';
             cardChoices.forEach((card) => {
                 let currCard = document.getElementById(card).parentNode;
-                currCard.classList.remove('strength', 'weakness');
+                currCard.classList.remove('strength', 'weakness', 'cardhover');
             })
         })
         card.addEventListener('click', () => {
