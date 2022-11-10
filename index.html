@@ -9,51 +9,27 @@
     </head>
 
     <body>
-        <header class="gameHead">
-            <h1>Rock, Paper, Scissors, Lizard, Spock</h1>
-            <p class="round">~ Round 00 ~</p>
-            <div class="scoreBoard">
-                <p class="score" id="playerScale">00</p>
-                <i class="las la-balance-scale" id="balance"></i>
-                <p class="score" id="computerScale">00</p>
-            </div>
-        </header>
-
-        <main class="gameBody">
-            <div class="battleArea">
-                <i class="las la-user-alt choice"></i>
-                <i class="las la-robot choice"></i>
-            </div>
-            <p class="message">~ Choose Wisely ~</p>
-            <div class="cardHand">
-                <div class="card" id="rockbtn">
-                    <img src="icons/rock.png" alt="rock" id="rock">
-                    <p class="cardName">rock</p>
-                </div>
-                <div class="card" id="paperbtn">
-                    <img src="icons/paper.png" alt="paper" id="paper">
-                    <p class="cardName">paper</p>
-                </div>
-                <div class="card" id="scissorsbtn">
-                    <img src="icons/scissors.png" alt="scissors" id="scissors">
-                    <p class="cardName">scissors</p>
-                </div>
-                <div class="card" id="lizardbtn">
-                    <img src="icons/lizard.png" alt="lizard" id="lizard">
-                    <p class="cardName">lizard</p>
-                </div>
-                <div class="card" id="spockbtn">
-                    <img src="icons/vulcan.png" alt="vulcan" id="spock">
-                    <p class="cardName">spock</p>
-                </div>   
-            </div>
-        </main>
-        
-        <a href="https://www.flaticon.com/free-icons/rock" title="rock icons">Rock icons created by Freepik - Flaticon</a>
-        <a href="https://www.flaticon.com/free-icons/rock" title="rock icons">Rock icons created by Icongeek26 - Flaticon</a>
-        <a href="https://www.flaticon.com/free-icons/paper" title="paper icons">Paper icons created by Freepik - Flaticon</a>
-        <a href="https://www.flaticon.com/free-icons/scissors" title="scissors icons">Scissors icons created by Freepik - Flaticon</a>
-        <a href="https://www.flaticon.com/free-icons/lizard" title="lizard icons">Lizard icons created by Freepik - Flaticon</a>
-        <a href="https://www.flaticon.com/free-icons/spock" title="spock icons">Spock icons created by Freepik - Flaticon</a>
+        <div class="playerBody">
+            <section class="playerCard" id="playerRockCard" style="background: hsl(4,99%,66%);">
+                <i class="las la-hand-rock"></i>
+                <p class="cardName">rock</p>
+            </section>
+            <section class="playerCard" id="playerPaperCard" style="background: hsl(233,21%,56%);">                        
+                <i class="las la-hand-paper"></i>
+                <p class="cardName">paper</p>
+            </section>
+            <section class="playerCard" id="playerScissorsCard" style="background: hsl(357,26%,42%);">
+                <i class="las la-hand-scissors"></i>
+                <p class="cardName">scissors</p>
+            </section>
+            <section class="playerCard" id="playerLizardCard" style="background: hsl(144,33%,68%);">
+                <i class="las la-hand-lizard"></i>
+                <p class="cardName">lizard</p>
+            </section>
+            <section class="playerCard" id="playerSpockCard" style="background: hsl(97,62%,80%);">
+                <i class="las la-hand-spock"></i>
+                <p class="cardName">spock</p>                    
+            </section>
+        </div>
     </body>
 </html>
