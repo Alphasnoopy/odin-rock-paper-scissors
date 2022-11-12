@@ -3,7 +3,7 @@ let playerScore = 0;
 let computerScore = 0;
 let roundNum = 0;
 let checkScore = 0;
-const cardHand = document.querySelectorAll('.card');
+const cardHand = document.querySelectorAll('.playerCard');
 const round = document.querySelector('.round');
 const overlay = document.querySelector('.overlay');
 const cardChoices = ["rock","paper","scissors","lizard","spock"];
@@ -12,12 +12,9 @@ const cardRules = {'rock':['scissors', 'lizard'],
                     'scissors':['paper', 'lizard'],
                     'lizard':['spock', 'paper'],
                     'spock':['scissors', 'rock']};
-const orignCards = document.querySelector('.battleArea').children;
 const cardFight = new Map(Object.entries(cardRules));
-const scores = document.querySelectorAll('.score');
-const playerScale = document.getElementById('playerScale');
-const computerScale = document.getElementById('computerScale');
-const balanceScale = document.getElementById('balance');
+const compScoreID = document.getElementById('compScore');
+const playerScoreID = document.getElementById('playerScore');
 const battleChoice = document.querySelectorAll('.choice');
 const restartBtn = document.createElement('button');
 const gameBody = document.querySelector('.gameBody');
@@ -32,15 +29,6 @@ function getComputerChoice() {
     return cardChoices[Math.floor(Math.random() * cardChoices.length)];
 }
 
-function battleCards(listClass) {
-    let newChoice = document.getElementById(listClass[1]);
-    listClass[1] = newChoice.classList;
-    battleChoice.forEach((choice) => { 
-        choice.removeAttribute('class');
-        choice.classList.add(...listClass.shift(), 'choice');
-    });
-}
-
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
 
@@ -48,25 +36,15 @@ function playRound(playerSelection, computerSelection) {
     else if (cardFight.get(playerSelection).includes(computerSelection)) {
         playerScore += 1;
         checkScore += 1;
+        playerScoreID.parentNode.classList.add('scoreAddStart');
+        playerScoreID.parentNode.classList.add('scoreAddEnd');
     }
     else {
         computerScore += 1;
         checkScore += 1;
     }
-    let playerScorePad = (playerScore < 10) ? String(playerScore).padStart(2,'0') : playerScore;
-    let computerScorePad = (computerScore < 10) ? String(computerScore).padStart(2,'0') : computerScore;
-    playerScale.textContent = playerScorePad;
-    computerScale.textContent = computerScorePad;
-    scale();
-}
-
-function scale() {
-    balanceScale.removeAttribute('class');
-    switch(true) {
-        case (playerScore === computerScore): balanceScale.classList.add('las', 'la-balance-scale'); break;
-        case (playerScore > computerScore): balanceScale.classList.add('las', 'la-balance-scale-left'); break;
-        case (playerScore < computerScore): balanceScale.classList.add('las', 'la-balance-scale-right'); break;
-    }
+    compScoreID.textContent = computerScore;
+    playerScoreID.textContent = playerScore;
 }
 
 function gameEnd() {
@@ -79,40 +57,17 @@ function gameEnd() {
 function game() {
     cardHand.forEach((card) => {
         card.addEventListener('mouseover', () => {
-            let playerSelection = card.firstElementChild;
-            let selectionName = card.querySelector('.cardName');
-            let strengthCardDeck = cardFight.get(playerSelection.id);
-
-            card.classList.add('cardhover');
-            playerSelection.style = 'opacity: 0.3';
-            selectionName.style = 'opacity: 1';
-            strengthCardDeck.forEach((strength) => {
-                let cardStrength = document.getElementById(strength).parentNode;
-                cardStrength.classList.add('strength');
-            });
-            let weakCardDeck = cardChoices.filter(weakCard => !strengthCardDeck.concat(playerSelection.id).includes(weakCard));
-            weakCardDeck.forEach((weakness) => {
-                let cardWeakness = document.getElementById(weakness).parentNode;
-                cardWeakness.classList.add('weakness');
-            });   
+            card.classList.add('cardhover'); 
         });
         card.addEventListener('mouseout', () => {
-            let playerSelection = card.firstElementChild;
-            let selectionName = card.querySelector('.cardName');
-            playerSelection.style = 'opacity: 1';
-            selectionName.style = 'opacity: 0';
-            cardChoices.forEach((card) => {
-                let currCard = document.getElementById(card).parentNode;
-                currCard.classList.remove('strength', 'weakness', 'cardhover');
-            })
+            card.classList.remove('cardhover');
         })
         card.addEventListener('click', () => {
             let playerSelection = card.firstElementChild;
             let computerSelection = getComputerChoice();
             card.classList.add('playCard');
             roundNumChange();
-            battleCards([playerSelection.classList,computerSelection]);
-            playRound(playerSelection.id, computerSelection);
+            playRound(playerSelection.className, computerSelection);
             card.classList.remove('playCard');
             if (checkScore === 5) {
                 gameEnd();
