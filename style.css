@@ -32,3 +32,11 @@
 .playerCard:hover .cardName {
     opacity: 1;
 }
+
+.playCard {
+    flex-basis: 20em;
+}
+
+.changeO {
+    opacity: 60%;
+}

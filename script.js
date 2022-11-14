@@ -63,15 +63,22 @@ function game() {
             card.classList.remove('cardhover');
         })
         card.addEventListener('click', () => {
-            let playerSelection = card.firstElementChild;
+            let playerSelection = card.querySelector('.cardName').textContent;
             let computerSelection = getComputerChoice();
             card.classList.add('playCard');
+            cardHand.forEach((choice) => {
+                choice.disabled = true;
+                if(choice != card){
+                    choice.classList.add('changeO');
+                }
+            })
+            /*
             roundNumChange();
             playRound(playerSelection.className, computerSelection);
             card.classList.remove('playCard');
             if (checkScore === 5) {
                 gameEnd();
-            }
+            }*/
         })
     })
 }
