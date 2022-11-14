@@ -69,9 +69,9 @@ function game() {
             cardHand.forEach((choice) => {
                 choice.disabled = true;
                 if(choice != card){
-                    choice.classList.add('changeO');
+                    choice.classList.add('changeOpacity');
                 }
-            })
+            });
             /*
             roundNumChange();
             playRound(playerSelection.className, computerSelection);

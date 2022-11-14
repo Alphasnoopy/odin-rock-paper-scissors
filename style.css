@@ -37,6 +37,10 @@
     flex-basis: 20em;
 }
 
-.changeO {
+.changeOpacity {
     opacity: 60%;
+}
+
+.ending {
+    visibility: hidden;
 }
