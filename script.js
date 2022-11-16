@@ -2,7 +2,7 @@
 let Typewriter = window.Typewriter;
 let playerScore = 0;
 let computerScore = 0;
-let roundNum = 0;
+let roundNum = 1;
 let checkScore = 0;
 let messageList = [];
 let lineNum = 0;
@@ -33,12 +33,6 @@ const cardFight = new Map(Object.entries(cardRules));
 const restartBtn = document.createElement('button');
 const choiceMessage = ["You have chosen ", "Your opponent has chosen "];
 const textLines = document.querySelectorAll('.text');
-
-function roundNumChange() {
-    roundNum += 1;
-    let roundNumPad = (roundNum < 10) ? String(roundNum).padStart(2,'0') : roundNum;
-    round.textContent = `~ Round ${roundNumPad} ~`;
-}
 
 function getComputerChoice() {
     let cardChoices = Object.keys(cardRules);
@@ -110,7 +104,9 @@ function game() {
                     choice.classList.add('changeOpacity');
                 }
             });
-            messageList.push(choiceMessage[0], 
+            messageList.push(
+                        roundNum.toString(),
+                        choiceMessage[0], 
                         choiceColor(cardFight.get(playerSelection).color, playerSelection.toUpperCase()), 
                         choiceMessage[1], 
                         choiceColor(cardFight.get(computerSelection).color, computerSelection.toUpperCase()));
@@ -125,6 +121,7 @@ function game() {
             if (checkScore === 5) {
                 gameEnd();
             }*/
+            roundNum += 1;
         })
     })
 }
