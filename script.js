@@ -6,7 +6,8 @@ let roundNum = 1;
 let checkScore = 0;
 let messageList = [];
 let lineNum = 0;
-delayNum = 75;
+let delayNum = 55;
+let preReverseList = [];
 const cardHand = document.querySelectorAll('.playerCard');
 const round = document.querySelector('.round');
 const cardRules = {'rock': {
@@ -65,18 +66,39 @@ function sleep(ms) {
 }
 
 function typeMessage(line, lineMessage) {
-    let typewriter = new Typewriter(line, {delay: delayNum});
+    let typewriter = new Typewriter(line, {delay: delayNum, cursor: ""});
     typewriter
     .typeString(lineMessage)
     .start();
+    preReverseList.push(typewriter);
 }
 
-async function MessageSeq() {
+async function messageSeq() {
     for (const line of textLines) {
         typeMessage(line, messageList[lineNum]);
         await sleep(delayNum * (messageList[lineNum].length + 10));
         lineNum += 1;
     }
+}
+
+function deleteMessage(line) {
+    line
+    .deleteAll()
+    .start();
+}
+
+async function deleteSeq() {
+    const reverseTextLines = preReverseList.slice().reverse();
+    for (const line of reverseTextLines) {
+        deleteMessage(line);
+        await sleep(1000);
+    }
+}
+
+async function typeDelete() {
+    messageSeq();
+    await sleep(15000);
+    deleteSeq();
 }
 
 function gameEnd() {
@@ -113,10 +135,8 @@ function game() {
             playRound(playerSelection, computerSelection);
             const testing = document.querySelectorAll('.testing');
             lineNum = 0;
-            MessageSeq();
+            typeDelete();
             /*
-            roundNumChange();
-            playRound(playerSelection.className, computerSelection);
             card.classList.remove('playCard');
             if (checkScore === 5) {
                 gameEnd();
