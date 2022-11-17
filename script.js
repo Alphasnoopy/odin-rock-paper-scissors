@@ -8,32 +8,35 @@ let messageList = [];
 let lineNum = 0;
 let delayNum = 55;
 let preReverseList = [];
+let resultMsg = '';
+let winnerChoiceColor = '';
+let loserChoiceColor = '';
 const cardHand = document.querySelectorAll('.playerCard');
 const round = document.querySelector('.round');
 const cardRules = {'rock': {
-                        'scissors': 'Rock Crushes Scissors!', 
-                        'lizard': 'Rock Crushes Lizard!',
-                        'color': 'gray'},
+                        'scissors': ' crushes ', 
+                        'lizard': ' crushes ',
+                        'color': 'hsl(357,26%,42%)'},
                     'paper': {
-                        'rock': 'Paper Covers Rock!', 
-                        'spock': 'Paper Disproves Spock!',
-                        'color': 'bisque'},
+                        'rock': ' covers ', 
+                        'spock': ' disproves ',
+                        'color': 'hsl(33, 100%, 80%)'},
                     'scissors':{
-                        'paper': 'Scissors Cuts Paper!', 
-                        'lizard': 'Scissors Decapitates Lizard!',
-                        'color': 'red'},
+                        'paper': ' cuts ', 
+                        'lizard': ' decapitates ',
+                        'color': 'hsl(4,75%,59%)'},
                     'lizard':{
-                        'spock': 'Lizard Poisons Spock!', 
-                        'paper': 'Lizard Eats Paper!',
-                        'color': 'green'},
+                        'spock': ' poisons ', 
+                        'paper': ' eats ',
+                        'color': 'hsl(144,33%,68%)'},
                     'spock':{
-                        'scissors': 'Spock Smashes Scissors!', 
-                        'rock': 'Spock Vaporizes Rock!',
-                        'color': 'blue'}};
+                        'scissors': ' smashes ', 
+                        'rock': ' vaporizes ',
+                        'color': 'hsl(233,43%,56%)'}};
 const cardFight = new Map(Object.entries(cardRules));
 const restartBtn = document.createElement('button');
 const choiceMessage = ["You have chosen ", "Your opponent has chosen "];
-const textLines = document.querySelectorAll('.text');
+const textLine = document.querySelector('.text');
 
 function getComputerChoice() {
     let cardChoices = Object.keys(cardRules);
@@ -51,54 +54,39 @@ function playRound(playerSelection, computerSelection) {
     else if (Object.keys(cardFight.get(playerSelection)).includes(computerSelection)) {
         playerScore += 1;
         checkScore += 1;
-        messageList.push('Yay, ', cardFight.get(playerSelection)[computerSelection]);
+        winnerChoiceColor = choiceColor(cardFight.get(playerSelection).color, playerSelection.toUpperCase());
+        loserChoiceColor = choiceColor(cardFight.get(computerSelection).color, computerSelection.toUpperCase());
+        resultMsg = winnerChoiceColor + cardFight.get(playerSelection)[computerSelection] + loserChoiceColor;
+        messageList.push('Yay :) ', resultMsg);
     }
     else {
         computerScore += 1;
         checkScore += 1;
-        messageList.push('Oh no, ', cardFight.get(computerSelection)[playerSelection]);
+        winnerChoiceColor = choiceColor(cardFight.get(computerSelection).color, computerSelection.toUpperCase());
+        loserChoiceColor = choiceColor(cardFight.get(playerSelection).color, playerSelection.toUpperCase());
+        resultMsg = winnerChoiceColor + cardFight.get(computerSelection)[playerSelection] + loserChoiceColor;
+        messageList.push('Oh no :( ', resultMsg);
     }
-    messageList.push(`${playerScore} vs ${computerScore}`);
+    messageList.push(`Score: ${playerScore} vs ${choiceColor('red', computerScore)}`);
 }
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-function typeMessage(line, lineMessage) {
-    let typewriter = new Typewriter(line, {delay: delayNum, cursor: ""});
+function typeMessage() {
+    let typewriter = new Typewriter(textLine, {delay: 65, deleteSpeed: 35});
     typewriter
-    .typeString(lineMessage)
+    .typeString(messageList[1])
+    .pauseFor(1500)
+    .typeString(messageList[2] + '<br />')
+    .pauseFor(1500)
+    .typeString(messageList[3])
+    .pauseFor(1500)
+    .typeString(messageList[4] + '<br />')
+    .pauseFor(1500)
+    .typeString(messageList[5] + '<br />')
+    .pauseFor(500)
+    .typeString(messageList[6] + '<br />')
+    .pauseFor(1500)
+    .typeString(messageList[7])
     .start();
-    preReverseList.push(typewriter);
-}
-
-async function messageSeq() {
-    for (const line of textLines) {
-        typeMessage(line, messageList[lineNum]);
-        await sleep(delayNum * (messageList[lineNum].length + 10));
-        lineNum += 1;
-    }
-}
-
-function deleteMessage(line) {
-    line
-    .deleteAll()
-    .start();
-}
-
-async function deleteSeq() {
-    const reverseTextLines = preReverseList.slice().reverse();
-    for (const line of reverseTextLines) {
-        deleteMessage(line);
-        await sleep(1000);
-    }
-}
-
-async function typeDelete() {
-    messageSeq();
-    await sleep(15000);
-    deleteSeq();
 }
 
 function gameEnd() {
@@ -133,9 +121,7 @@ function game() {
                         choiceMessage[1], 
                         choiceColor(cardFight.get(computerSelection).color, computerSelection.toUpperCase()));
             playRound(playerSelection, computerSelection);
-            const testing = document.querySelectorAll('.testing');
-            lineNum = 0;
-            typeDelete();
+            typeMessage();
             /*
             card.classList.remove('playCard');
             if (checkScore === 5) {
