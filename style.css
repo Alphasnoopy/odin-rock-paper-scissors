@@ -1,3 +1,21 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(160, 156, 156);
+    color: white;
+}
+
+h1 {
+    font-family: FreeMono, monospace;
+    font-variant: small-caps;
+    display: flex;
+    justify-content: center;
+}
+
 .playerBody {
     box-sizing: border-box;
     display: flex;
@@ -8,11 +26,11 @@
     display: flex;
     flex-direction: column;
     flex: 1 0 10em;
-    box-shadow: 0 0 30px #424242;
     padding: 1em;
     color: white;
     transition: flex-basis 500ms ease-in-out;
     overflow: hidden;
+    border-style: none;
 }
 .las {
     font-size: 3em;
@@ -38,9 +56,21 @@
 }
 
 .changeOpacity {
-    opacity: 60%;
+    opacity: 20%;
 }
 
 .ending {
     visibility: hidden;
+}
+
+main {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.text {
+    font-size: 50px;
+    text-align: center;
 }
