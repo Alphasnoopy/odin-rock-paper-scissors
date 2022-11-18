@@ -3,14 +3,14 @@ let Typewriter = window.Typewriter;
 let playerScore = 0;
 let computerScore = 0;
 let roundNum = 1;
-let checkScore = 0;
-let messageList = [];
+let checkScore = 4;
 let lineNum = 0;
 let delayNum = 55;
 let preReverseList = [];
 let resultMsg = '';
 let winnerChoiceColor = '';
 let loserChoiceColor = '';
+let messageList = [];
 const cardHand = document.querySelectorAll('.playerCard');
 const round = document.querySelector('.round');
 const cardRules = {'rock': {
@@ -34,9 +34,13 @@ const cardRules = {'rock': {
                         'rock': ' vaporizes ',
                         'color': 'hsl(233,43%,56%)'}};
 const cardFight = new Map(Object.entries(cardRules));
-const restartBtn = document.createElement('button');
 const choiceMessage = ["You have chosen ", "Your opponent has chosen "];
 const textLine = document.querySelector('.text');
+let typewriter = new Typewriter(textLine, {delay: 45});
+const ending = document.querySelector('.ending');
+const finalResult = document.querySelector('.finalResult');
+const restartBtn = document.querySelector('.restart');
+
 
 function getComputerChoice() {
     let cardChoices = Object.keys(cardRules);
@@ -71,28 +75,68 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function typeMessage() {
-    let typewriter = new Typewriter(textLine, {delay: 65, deleteSpeed: 35});
     typewriter
     .typeString(messageList[1])
-    .pauseFor(1500)
+    .pauseFor(750)
     .typeString(messageList[2] + '<br />')
-    .pauseFor(1500)
+    .pauseFor(750)
     .typeString(messageList[3])
-    .pauseFor(1500)
+    .pauseFor(750)
     .typeString(messageList[4] + '<br />')
-    .pauseFor(1500)
+    .pauseFor(750)
     .typeString(messageList[5] + '<br />')
-    .pauseFor(500)
+    .pauseFor(250)
     .typeString(messageList[6] + '<br />')
-    .pauseFor(1500)
+    .pauseFor(750)
     .typeString(messageList[7])
     .start();
 }
 
+function sleep(ms) {
+    return new Promise ((resolve) => {
+        setTimeout(resolve, ms)
+    });
+}
+
+async function scoreCheck(cardHand) {
+    console.log(checkScore);
+    if (checkScore === 5){
+        console.log("i am here");
+        typeMessage();
+        await sleep(10000);
+        gameEnd();
+    }
+    else {
+        typeMessage();
+        await sleep(10000);
+        cardHand.forEach((choice) => {
+            choice.disabled = false;
+            choice.classList.remove('changeOpacity');
+        });
+        messageList = [];
+    }
+}
+
+async function removeText() {
+    typewriter
+    .deleteAll(1)
+    .start();
+}
+
+async function checkRemove(cardHand) {
+    removeText();
+    await sleep(2000);
+    scoreCheck(cardHand);
+}
+
 function gameEnd() {
-    restartBtn.classList.add('restartBtn');
-    restartBtn.textContent = 'Play Again';
-    gameBody.appendChild(restartBtn);
+    ending.style = 'visibility: visible; opacity: 1';
+    if (computerScore > playerScore) {
+        finalResult.textContent = 'You Lose!';
+        finalResult.style = 'color: red';
+    }
+    restartBtn.style = 'cursor: pointer';
+    restartBtn.disabled = false;
     restartBtn.addEventListener('click', () => window.location.reload());
 }
 
@@ -121,12 +165,12 @@ function game() {
                         choiceMessage[1], 
                         choiceColor(cardFight.get(computerSelection).color, computerSelection.toUpperCase()));
             playRound(playerSelection, computerSelection);
-            typeMessage();
-            /*
-            card.classList.remove('playCard');
-            if (checkScore === 5) {
-                gameEnd();
-            }*/
+            if (textLine.textContent !== "|") {
+                checkRemove(cardHand);
+            }
+            else {
+                scoreCheck(cardHand);
+            }     
             roundNum += 1;
         })
     })
