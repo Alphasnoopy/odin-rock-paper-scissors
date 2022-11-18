@@ -60,7 +60,13 @@ h1 {
 }
 
 .ending {
-    visibility: hidden;
+    visibility: visible;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 1.5s;
 }
 
 main {
@@ -68,9 +74,30 @@ main {
     flex: 1;
     flex-direction: column;
     justify-content: space-between;
+    margin-top: 0;
+    padding-top:0;
 }
 
 .text {
     font-size: 50px;
     text-align: center;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.finalResult {
+    padding: 0;
+    margin: 0;
+    font-size: 50px;
+    color: green;
+}
+
+.restart {
+    background-color: transparent;  
+    border: 3px solid white;
+    border-radius: 8px;
+    padding: 20px 15px;
+    font-size: 25px;
+    color: white;
+    margin-top: 10px;
 }
