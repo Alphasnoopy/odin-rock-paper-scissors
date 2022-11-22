@@ -86,15 +86,15 @@ main {
 }
 
 .paperColor {
-    color: hsl(33, 100%, 80%);
+    color: rgb(255, 209, 153);
 }
 
 .scissorsColor {
-    color: hsl(4,75%,59%);
+    color: rgb(229, 72, 82);
 }
 
 .lizardColor {
-    color: hsl(144,33%,68%);
+    color: rgb(146, 200, 168);
 }
 
 .spockColor {
@@ -127,6 +127,16 @@ main {
     font-size: 25px;
     color: white;
     margin-top: 10px;
+}
+
+/* Footer Section */
+.copyright {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    margin: 0;
+    padding: 0;
 }
 
 /* Event/Add Section */
