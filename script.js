@@ -3,7 +3,6 @@
 let Typewriter = window.Typewriter;
 let playerScore = 0;
 let computerScore = 0;
-let roundNum = 1;
 let checkScore = 0;
 let resultMsg = '';
 let winnerChoiceColor = '';
@@ -79,19 +78,19 @@ function playRound(playerSelection, computerSelection) {
 // Type each string in list on the appropriate lines
 function typeMessage() {
     typewriter
-    .typeString(messageList[1])
+    .typeString(messageList[0])
     .pauseFor(750)
-    .typeString(messageList[2] + '<br />')
+    .typeString(messageList[1] + '<br />')
     .pauseFor(750)
-    .typeString(messageList[3])
+    .typeString(messageList[2])
+    .pauseFor(750)
+    .typeString(messageList[3] + '<br />')
     .pauseFor(750)
     .typeString(messageList[4] + '<br />')
-    .pauseFor(750)
-    .typeString(messageList[5] + '<br />')
     .pauseFor(250)
-    .typeString(messageList[6] + '<br />')
+    .typeString(messageList[5] + '<br />')
     .pauseFor(750)
-    .typeString(messageList[7])
+    .typeString(messageList[6])
     .start();
 }
 
@@ -164,7 +163,6 @@ function game() {
                 }
             });
             messageList.push(
-                        roundNum.toString(),
                         choiceMessage[0], 
                         choiceColor(cardFight.get(playerSelection).color, playerSelection.toUpperCase()), 
                         choiceMessage[1], 
@@ -177,7 +175,6 @@ function game() {
             else {
                 scoreCheck(cardHand);
             }     
-            roundNum += 1;
         })
     })
 }
