@@ -73,7 +73,7 @@ function playRound(playerSelection, computerSelection) {
         resultMsg = winnerChoiceColor + cardFight.get(computerSelection)[playerSelection] + loserChoiceColor;
         messageList.push('Oh no :( ', resultMsg);
     }
-    messageList.push(`Score: ${playerScore} vs ${choiceColor('red', computerScore)}`);
+    messageList.push(`Score: ${playerScore} vs ${choiceColor('scoreColor', computerScore)}`);
 }
 
 // Type each string in list on the appropriate lines

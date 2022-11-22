@@ -159,3 +159,7 @@ main {
 .cursorChange {
     cursor: auto;
 }
+
+.scoreColor {
+    color: red;
+}
