@@ -9,6 +9,8 @@ body {
     color: white;
 }
 
+/* Header Section */
+
 h1 {
     font-family: FreeMono, monospace;
     font-variant: small-caps;
@@ -16,6 +18,26 @@ h1 {
     justify-content: center;
 }
 
+/* Main Section */
+
+main {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 0;
+    padding-top:0;
+}
+
+/* Output Section */
+.text {
+    font-size: 50px;
+    text-align: center;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* Card Section */
 .playerBody {
     box-sizing: border-box;
     display: flex;
@@ -31,6 +53,7 @@ h1 {
     transition: flex-basis 500ms ease-in-out;
     overflow: hidden;
     border-style: none;
+    cursor: pointer;
 }
 .las {
     font-size: 3em;
@@ -39,26 +62,46 @@ h1 {
 .cardName {
     margin: 0;
     padding: 0;
+    font-size: 50px;
+}
+
+/* Card Hidden Info Section */
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    gap: 15px;
+    margin: 10px 0;
+    font-weight: 700;
     opacity: 0;
-    transition: opacity 500ms ease-in-out;
+    transition: opacity 1s;
 }
 
-.playerCard:hover {
-    flex-basis: 20em;
+.detailSize {
+    font-size: 22px;
 }
 
-.playerCard:hover .cardName {
-    opacity: 1;
+.rockColor {
+    color: rgb(146, 40, 40);
 }
 
-.playCard {
-    flex-basis: 20em;
+.paperColor {
+    color: hsl(33, 100%, 80%);
 }
 
-.changeOpacity {
-    opacity: 20%;
+.scissorsColor {
+    color: hsl(4,75%,59%);
 }
 
+.lizardColor {
+    color: hsl(144,33%,68%);
+}
+
+.spockColor {
+    color: rgb(54, 68, 173);
+}
+
+/* Game End Section */
 .ending {
     visibility: visible;
     align-self: center;
@@ -67,22 +110,6 @@ h1 {
     align-items: center;
     opacity: 0;
     transition: opacity 1.5s;
-}
-
-main {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-top: 0;
-    padding-top:0;
-}
-
-.text {
-    font-size: 50px;
-    text-align: center;
-    margin-bottom: 0;
-    padding-bottom: 0;
 }
 
 .finalResult {
@@ -100,4 +127,25 @@ main {
     font-size: 25px;
     color: white;
     margin-top: 10px;
+}
+
+/* Event/Add Section */
+.playerCard:hover {
+    flex-basis: 20em;
+}
+
+.playerCard:hover .info {
+    opacity: 1;
+}
+
+.playCard {
+    flex-basis: 20em;
+}
+
+.changeOpacity {
+    opacity: 20%;
+}
+
+.cursorChange {
+    cursor: auto;
 }
