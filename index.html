@@ -22,25 +22,75 @@
                 <button class="restart" disabled>Click to Play</button>
             </div>
             <div class="playerBody">
-                <button class="playerCard" id="playerRockCard" style="background: hsl(357,26%,42%);">
+                <button class="playerCard" id="playerRockCard" style="background: rgb(146, 40, 40);">
                     <i class="las la-hand-rock"></i>
                     <p class="cardName">rock</p>
+                    <div class="info">
+                        <p class="details">Strong Against: 
+                            <span class="scissorsColor detailSize">SCISSORS</span>, 
+                            <span class="lizardColor detailSize">LIZARD</span>
+                        </p>
+                        <p class="details">Weak Against: 
+                            <span class="paperColor detailSize">PAPER</span>, 
+                            <span class="spockColor detailSize">SPOCK</span>
+                        </p>
+                    </div>
                 </button>
                 <button class="playerCard" id="playerPaperCard" style="background: hsl(33, 100%, 80%);">                        
                     <i class="las la-hand-paper"></i>
                     <p class="cardName">paper</p>
+                    <div class="info">
+                        <p class="details">Strong Against: 
+                            <span class="rockColor detailSize">ROCK</span>, 
+                            <span class="spockColor detailSize">SPOCK</span>
+                        </p>
+                        <p class="details">Weak Against: 
+                            <span class="scissorsColor detailSize">SCISSORS</span>, 
+                            <span class="lizardColor detailSize">LIZARD</span>
+                        </p>
+                    </div>
                 </button>
                 <button class="playerCard" id="playerScissorsCard" style="background: hsl(4,75%,59%);">
                     <i class="las la-hand-scissors"></i>
                     <p class="cardName">scissors</p>
+                    <div class="info">
+                        <p class="details">Strong Against: 
+                            <span class="paperColor detailSize">PAPER</span>, 
+                            <span class="lizardColor detailSize">LIZARD</span>
+                        </p>
+                        <p class="details">Weak Against: 
+                            <span class="rockColor detailSize">ROCK</span>, 
+                            <span class="spockColor detailSize">SPOCK</span>
+                        </p>
+                    </div>
                 </button>
                 <button class="playerCard" id="playerLizardCard" style="background: hsl(144,33%,68%);">
                     <i class="las la-hand-lizard"></i>
                     <p class="cardName">lizard</p>
+                    <div class="info">
+                        <p class="details">Strong Against: 
+                            <span class="spockColor detailSize">SPOCK</span>, 
+                            <span class="paperColor detailSize">PAPER</span>
+                        </p>
+                        <p class="details">Weak Against: 
+                            <span class="rockColor detailSize">ROCK</span>, 
+                            <span class="scissorsColor detailSize">SCISSORS</span>
+                        </p>
+                    </div>
                 </button>
-                <button class="playerCard" id="playerSpockCard" style="background: hsl(233,43%,56%);">
+                <button class="playerCard" id="playerSpockCard" style="background: rgb(54, 68, 173);">
                     <i class="las la-hand-spock"></i>
-                    <p class="cardName">spock</p>                    
+                    <p class="cardName">spock</p>   
+                    <div class="info">
+                        <p class="details">Strong Against: 
+                            <span class="scissorsColor detailSize">SCISSORS</span>, 
+                            <span class="rockColor detailSize">ROCK</span>
+                        </p>
+                        <p class="details">Weak Against: 
+                            <span class="paperColor detailSize">PAPER</span>, 
+                            <span class="lizardColor detailSize">LIZARD</span>
+                        </p>
+                    </div>                 
                 </button>
             </div>
         </main>
